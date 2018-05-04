@@ -4,10 +4,12 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install python-coveralls
+  - pip install coveralls
   - pip install nose
   - pip install coverage
 script:
   - python setup.py install
   - nosetests --with-coverage # Add me to run nose with coverage support.
+  - pytest --cov=./ # or py.test for Python versions 3.5 and below
 after_success: 
     -coveralls
