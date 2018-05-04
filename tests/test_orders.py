@@ -18,7 +18,7 @@ class Orders(unittest.TestCase):
     def test_get_empty_order(self):
         result = self.test.get("/api/v1/orders")
         #print(result.data)
-        self.assertEqual(result.status_code, 404) 
+        self.assertEqual(result.status_code, 204) 
 
     def test_correct_order(self):
         result = self.test.post(
@@ -34,7 +34,7 @@ class Orders(unittest.TestCase):
 
     def test_empty_order_update(self):
         result = self.test.put(
-            "/api/v1/orders/orderid", 
+            "/api/v1/orders/1", 
             data = json.dumps({"orders": ""}), 
             content_type = "application/json"
         )
@@ -42,7 +42,7 @@ class Orders(unittest.TestCase):
 
     def test_correct_order_update(self):
         result = self.test.put(
-            "/api/v1/orders/orderid", 
+            "/api/v1/orders/1", 
             data = json.dumps({"orders": "['beef']"}), 
             content_type = "application/json"
         )

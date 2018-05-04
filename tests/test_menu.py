@@ -18,7 +18,7 @@ class Menu(unittest.TestCase):
     def test_get_empty_menu(self):
         result = self.test.get("/api/v1/menu")
         #print(result.data)
-        self.assertEqual(result.status_code, 404) 
+        self.assertEqual(result.status_code, 204) 
 
     def test_set_the_menu(self):
         result = self.test.post(
@@ -30,7 +30,7 @@ class Menu(unittest.TestCase):
 
     def test_get_menu(self):
         result = self.test.get("/api/v1/menu")
-        self.assertEqual(result.data, 200)
+        self.assertEqual(result.status_code, 200)
 
 if __name__ == "__main__":
     unittest.main()

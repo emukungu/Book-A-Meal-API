@@ -27,10 +27,8 @@ def setup_menu():
                             "meal name": item,
                             "price": meal._price
                         })
-            menu_list.append(menu)
-            print(menu_list)
-            print(menu.menu())
-            response["message"] : "Menu successfully set."
+                        menu_list.append(menu)
+                        response["message"] = "Menu successfully set."
             return jsonify(response), 200
                     
 

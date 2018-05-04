@@ -1,5 +1,6 @@
 from flask import jsonify, request, json
-from app import app, orders_list, meal_list
+from app import app
+from app import orders_list, meal_list
 from app.models import models
 from app.models.models import Orders
 
@@ -11,7 +12,7 @@ def orders():
     data = request.json
     order = data["order"]
     
-    if order == "" or order == None:
+    if order == []:
         response['message'] = "No orders"
 
         return jsonify(response),400
@@ -21,7 +22,7 @@ def orders():
         for item in order:
             for meal in meal_list:
                 if item == meal._meal_name:
-                    orders._total += meal._price
+                    orders._total += float(meal._price)
         orders_list.append(orders)
         response["message"] : "Orders successfully set."
         return jsonify(response), 200
@@ -41,31 +42,34 @@ def get_orders():
                 })
             response['message'] = get_orders
             return jsonify(response),200
-        else:
-            
+        else:            
             response['message'] = "No orders made"
-            return jsonify(response),404
+            return jsonify(response), 204
 
-@app.route("/api/v1/orders/orderid", methods=['PUT'])
-def modify_order():
+@app.route("/api/v1/orders/<int:order_id>", methods=['PUT'])
+def modify_order(order_id):
     response = {
         "status" : "fail",
         "message" : "No changes done"
     }
-    data = request.json
-    orders = data.get('orders')
-    if orders == "" or orders == None:
-        response['message'] = "Invalid update"
+    #data = request.json
+    #orders = data.get('orders')
+    #if orders == [] or orders == None:
+    #   response['message'] = "Invalid update"
 
-        return jsonify(response), 400
+    #    return jsonify(response), 400
 
-    else:
-        orders_list.append(Orders(items=orders))
-        for item in orders:
-            for meal in meal_list:
-                for menu_order in orders_list:
-                    if meal._meal_name == item:
-                        menu_order._total += meal._price
+    #else:
+        
+        #orders_list.append(Orders(items=orders))
+        #for item in orders:
+    update_order = []
+    for meal in meal_list:
+        for order in orders_list:
+            if meal._meal_id == order_id:
+                    order._total += float(meal._price)
+                    update_order.append(meal._meal_name)
+    orders_list.append(Orders(items= update_order))
 
-        response['message'] = 'Order has been updated'
-        return jsonify(response), 200
+    response['message'] = 'Order has been updated'
+    return jsonify(response), 200

@@ -26,9 +26,10 @@ class User_logged_in(object):
 
 
 class Meals(object): #get all meals
-    def __init__(self, meal_name = None, price = None,):
+    def __init__(self, meal_name = None, price = None):
         self._meal_name = meal_name
         self._price = price
+        self._meal_id = 0
     
     
     def meal_name(self):
@@ -36,6 +37,9 @@ class Meals(object): #get all meals
     
     def price(self):
         return self._price
+
+    def meal_id(self):
+        return self._meal_id
         
 
 class Menu(object):
