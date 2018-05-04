@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.6"
+  - travis "3.6"
 install:
   - pip install -r requirements.txt
   - pip install python-coveralls
@@ -9,5 +9,5 @@ install:
 script:
   - python setup.py install
   - nosetests --with-coverage # Add me to run nose with coverage support.
-success: 
+after_success: 
     -coveralls
