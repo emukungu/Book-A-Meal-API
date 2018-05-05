@@ -1,0 +1,9 @@
+{
+  "tests/test_meals.py::Meals::test_correct_delete_meal": true,
+  "tests/test_meals.py::Meals::test_correct_update_meal": true,
+  "tests/test_meals.py::Meals::test_empty_delete_meal": true,
+  "tests/test_meals.py::Meals::test_empty_update_meal": true,
+  "tests/test_meals.py::Meals::test_no_meals": true,
+  "tests/test_menu.py::Menu::test_get_menu": true,
+  "tests/test_orders.py::Orders::test_get_empty_order": true
+}
