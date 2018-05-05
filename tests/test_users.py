@@ -1,5 +1,6 @@
 import unittest 
-from app import app, views, models
+from app import app
+from app import views, models
 import json
 
 
@@ -21,19 +22,11 @@ class User(unittest.TestCase):
     def test_signup_filled_fields(self):
         result = self.test.post(
             "/api/v1/auth/signup", 
-            data = json.dumps({"firstName": "Esther", "password": "mukungu", "lastName":"Namusisi"}), 
+            data = json.dumps({"user_id":1,"firstName": "Esther", "password": "mukungu", "lastName":"Namusisi", "username":"essy"}), 
             content_type ='application/json'
         )
         print(result.data)
         self.assertEqual(result.status_code, 201)
-
-    def test_login_null_users(self):
-        result = self.test.post(
-            "/api/v1/auth/login",
-             data = json.dumps({'username':None, 'password': None}), 
-             content_type = 'application/json'
-        )
-        self.assertEqual(result.status_code, 401)
 
     def test_login_empty_users(self): 
         result = self.test.post(
