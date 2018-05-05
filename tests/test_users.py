@@ -14,7 +14,7 @@ class User(unittest.TestCase):
        
         res = self.test.post(
             "/api/v1/auth/signup", 
-            data = json.dumps({'firstName': "", 'password':"", 'lastName':''}), 
+            data = json.dumps({'firstName': "", 'password':"", 'lastName':'', 'username': "", 'user_id': ""}), 
             content_type = 'application/json'
         )
         self.assertEqual(res.status_code, 400)
