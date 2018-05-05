@@ -13,7 +13,7 @@ def setup_menu():
         data = request.json
         menu_title = data["menu_title"]
         menu_items = data["menu_items"]
-        if menu_title == "":
+        if menu_title == "" or menu_items == []:
             response['message'] = "No menu has been set"
 
             return jsonify(response),400
@@ -40,12 +40,11 @@ def get_menu():
     if len(menu_list) > 0:
         menus = []
         for item in menu_list:
-            print(item.menu())
             menus.append(item.menu())
         
-        #response["menu"] : menus
-        return jsonify(menus), 200
+        response["menu"] = menus
+        return jsonify(response), 200
     else:
         
         response['message'] = "No menu available"
-        return jsonify(response), 404
+        return jsonify(response), 204
