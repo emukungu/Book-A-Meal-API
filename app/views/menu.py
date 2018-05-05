@@ -13,7 +13,7 @@ def setup_menu():
         data = request.json
         menu_title = data["menu_title"]
         menu_items = data["menu_items"]
-        if menu_title == "" or menu_items == []:
+        if menu_title == "" and menu_items == []:
             response['message'] = "No menu has been set"
 
             return jsonify(response),400
@@ -29,6 +29,7 @@ def setup_menu():
                         })
                         menu_list.append(menu)
                         response["message"] = "Menu successfully set."
+                        response["message"] = "ok"
             return jsonify(response), 200
                     
 
@@ -47,4 +48,5 @@ def get_menu():
     else:
         
         response['message'] = "No menu available"
+        response["status"] = "ok"
         return jsonify(response), 204
