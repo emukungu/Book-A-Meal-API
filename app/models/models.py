@@ -1,8 +1,10 @@
 class User(object):
-    def __init__(self, firstName=None, lastName=None, password = None):
+    def __init__(self, user_id, firstName=None, lastName=None, password = None, username = None):
+        self._user_id = user_id
         self._firstName = firstName
         self._lastName = lastName
         self._password = password
+        self._username = username
     
     def firstName(self):
         return self._firstName
@@ -13,17 +15,11 @@ class User(object):
     def password(self):
         return self._password
 
-class User_logged_in(object):
-    def __init__(self, username=None, password = None):
-        self._username = username
-        self._password = password
-    
+    def __id__(self):
+        return self._user_id
+
     def username(self):
         return self._username
-
-    def password(self):
-        return self._password  
-
 
 class Meals(object): #get all meals
     def __init__(self, meal_name = None, price = None):
