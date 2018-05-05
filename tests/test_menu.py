@@ -10,7 +10,7 @@ class Menu(unittest.TestCase):
     def test_empty_menu(self):
         result = self.test.post(
             "/api/v1/menu", 
-            data = json.dumps({"menu_title":"", "menu_items":""}), 
+            data = json.dumps({"menu_title":"", "menu_items":[]}), 
             content_type = "application/json"
         )
         self.assertEqual(result.status_code, 400)
@@ -23,7 +23,7 @@ class Menu(unittest.TestCase):
     def test_set_the_menu(self):
         result = self.test.post(
             "/api/v1/menu", 
-            data = json.dumps({"menu_title":"Italian", "menu_items":'["beef", "goat", "chicken"]'}), 
+            data = json.dumps({"menu_title":"Italian", "menu_items":["beef", "goat", "chicken"]}), 
             content_type = "application/json"
         )   
         self.assertEqual(result.status_code, 200)

@@ -14,12 +14,6 @@ class Meals(unittest.TestCase):
             content_type = "application/json"
         )
         self.assertEqual(result.status_code, 400)
-       
-
-    def test_no_meals(self):
-        result = self.test.get("/api/v1/meals")
-        print(result.data)
-        self.assertEqual(result.status_code, 204) 
 
     def test_add_right_meal(self):
         result = self.test.post(
