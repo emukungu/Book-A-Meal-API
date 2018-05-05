@@ -9,23 +9,24 @@ def orders():
     response = {
         "message": ""
     }
-    data = request.json
-    order = data["order"]
+    if request.method == 'POST':
+        data = request.json
+        order = data["order"]
     
-    if order == []:
-        response['message'] = "No orders"
+        if order == []:
+            response['message'] = "Enter your orders"
 
-        return jsonify(response),400
+            return jsonify(response),400
 
-    else:
-        orders = Orders(items = order)
-        for item in order:
-            for meal in meal_list:
-                if item == meal._meal_name:
-                    orders._total += float(meal._price)
-        orders_list.append(orders)
-        response["message"] : "Orders successfully set."
-        return jsonify(response), 200
+        else:
+            orders = Orders(items = order)
+            for item in order:
+                for meal in meal_list:
+                    if item == meal._meal_name:
+                        orders._total += float(meal._price)
+                        orders_list.append(orders)
+                        response["message"] = "Orders successfully set."
+            return jsonify(response), 200
 
 @app.route("/api/v1/orders", methods = ['GET'])
 def get_orders():
@@ -44,7 +45,8 @@ def get_orders():
             return jsonify(response),200
         else:            
             response['message'] = "No orders made"
-            return jsonify(response), 204
+            response['status'] = "successful"
+            return jsonify(response), 404
 
 @app.route("/api/v1/orders/<int:order_id>", methods=['PUT'])
 def modify_order(order_id):
@@ -52,17 +54,6 @@ def modify_order(order_id):
         "status" : "fail",
         "message" : "No changes done"
     }
-    #data = request.json
-    #orders = data.get('orders')
-    #if orders == [] or orders == None:
-    #   response['message'] = "Invalid update"
-
-    #    return jsonify(response), 400
-
-    #else:
-        
-        #orders_list.append(Orders(items=orders))
-        #for item in orders:
     update_order = []
     for meal in meal_list:
         for order in orders_list:
@@ -72,4 +63,5 @@ def modify_order(order_id):
     orders_list.append(Orders(items= update_order))
 
     response['message'] = 'Order has been updated'
+    response['status'] = "successful"
     return jsonify(response), 200
